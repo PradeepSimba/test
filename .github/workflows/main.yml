@@ -3,24 +3,14 @@ name: Gradle Build
 on: [push, pull_request]
 
 jobs:
-
-build:
-
-runs-on: ${{ matrix.os }}
-
-strategy:
-
-matrix:
-
-os: [windows-2019]
-
-java: [ '16.0.2' ]
-
-fail-fast: false
-
-name: ${{ matrix.os }}
-
-
+   build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+    matrix:
+       os: [windows-2019]
+       java: [ '16.0.2' ]
+       fail-fast: false
+       name: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
