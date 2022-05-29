@@ -16,7 +16,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        arch: 'win32_mingw53'
+        arch: 'win32_mingw81'
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
     - name: compile qmake
