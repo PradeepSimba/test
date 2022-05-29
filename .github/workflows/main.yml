@@ -16,21 +16,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        version: '5.15.2'
-        host: 'windows'
-        target: 'desktop'
         arch: 'win32_mingw53'
-        dir: '${{ github.workspace }}/example/'
-        install-deps: 'true'
-        modules: 'qtcharts qtwebengine'
-        cached: 'false'
-        setup-python: 'true'
-        tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
-        set-env: 'false'
-        tools-only: 'false'
-        aqtversion: '==2.0.0'
-        py7zrversion: '==0.16.1'
-        extra: '--external 7z'
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
     - name: compile qmake
