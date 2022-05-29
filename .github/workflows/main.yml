@@ -1,69 +1,20 @@
-# This is a basic workflow to help you get started with Actions
-# workflow - цепочка действий
-# Имя процесса Билдится на всех типах 📦 🐍
-name: qmake
+name: Gradle Build
 
-# Controls when the action will run. Triggers the workflow on push
-on: 
-  push:
-  pull_request:
-  release:
-    # tags:
-    # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+on: [push, pull_request]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }} # будет запускаться по очереди на всех типах машин
+    runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        config: 
-        - {
-            name: "Windows Latest MSVC",
-            os: windows-latest,
-            artifact: "windows_msvc.7z",
-            build_type: "Release",
-            cc: "cl",
-            cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.12.25827/bin/Hostx64/x64",
-            archiver: "7z a",
-            generators: "Visual Studio 16 2019"
-          }
-        - {
-            name: "Windows Latest MinGW",
-            os: windows-latest,
-            artifact: "windows_mingw.7z",
-            build_type: "Release",
-            cc: "gcc",
-            cxx: "g++",
-            archiver: "7z a",
-            generators: "Ninja"
-          }
+        os: [windows-latest]
+      fail-fast: false
+    name: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
-      with:
-        version: '5.15.2'
-        host: 'windows'
-        target: 'desktop'
-        arch: 'win32_mingw53'
-        dir: '${{ github.workspace }}/example/'
-        install-deps: 'true'
-        modules: 'qtcharts qtwebengine'
-        cached: 'false'
-        setup-python: 'true'
-        tools: 'tools_ifw tools_qtcreator,qt.tools.qtcreator'
-        set-env: 'false'
-        tools-only: 'false'
-        aqtversion: '==2.0.0'
-        py7zrversion: '==0.16.1'
-        extra: '--external 7z'
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
     - name: compile qmake
