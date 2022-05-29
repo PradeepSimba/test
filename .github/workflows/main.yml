@@ -46,8 +46,6 @@ jobs:
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
-    - uses: actions/checkout@v2
-    - uses: ilammy/msvc-dev-cmd@v1
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
@@ -66,6 +64,8 @@ jobs:
         aqtversion: '==2.0.0'
         py7zrversion: '==0.16.1'
         extra: '--external 7z'
+    - uses: actions/checkout@v2
+    - uses: ilammy/msvc-dev-cmd@v1
     - name: compile qmake
       run:  qmake
     - name: compile make
