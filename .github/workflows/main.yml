@@ -25,9 +25,9 @@ jobs:
       if: matrix.os == 'macOS-latest'
       uses: jurplel/install-qt-action@v2
     - name: Set up MinGW
-        if: matrix.os == 'windows-latest'
-        uses: egor-tensin/setup-mingw@v2
-        with:
+      if: matrix.os == 'windows-latest'
+      uses: egor-tensin/setup-mingw@v2
+      with:
           platform: x64
     - name: compile qmake
       run:  qmake
