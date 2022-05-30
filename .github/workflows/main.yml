@@ -16,6 +16,8 @@ jobs:
     - name: Install Qt windows 
       if: matrix.os == 'windows-latest'
       uses: jurplel/install-qt-action@v2
+      with:
+        arch: 'win32_mingw81'
     - name: Install Qt linux 
       if: matrix.os == 'ubuntu-latest'
       uses: jurplel/install-qt-action@v2
