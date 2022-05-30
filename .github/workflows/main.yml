@@ -7,16 +7,23 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
       fail-fast: false
     name: ${{ matrix.os }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v2
-    - name: Install Qt
+    - name: Install Qt windows 
+      if: matrix.os == 'windows-latest'
       uses: jurplel/install-qt-action@v2
       with:
         arch: 'win32_mingw81'
+    - name: Install Qt linux 
+      if: matrix.os == 'ubuntu-latest'
+      uses: jurplel/install-qt-action@v2
+    - name: Install Qt mac
+      if: matrix.os == 'macOS-latest'
+      uses: jurplel/install-qt-action@v2
     - uses: actions/checkout@v2
     - uses: ilammy/msvc-dev-cmd@v1
     - name: compile qmake
