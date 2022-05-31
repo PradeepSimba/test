@@ -32,4 +32,4 @@ jobs:
     - name: compile qmake
       run:  qmake
     - name: compile make
-      run:  make
+      run:  nmake
